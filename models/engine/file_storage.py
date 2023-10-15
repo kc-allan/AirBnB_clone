@@ -2,9 +2,9 @@
 """ defines a class FileStorage """
 
 import json
-from models.base_model import BaseModel
-from models.user import User
-
+#from models.base_model import BaseModel
+#from models.user import User
+import os
 
 class FileStorage:
     """ serializes instances to a JSON file and deserializes JSON
@@ -22,7 +22,7 @@ class FileStorage:
         """ sets in __objects the obj with the key <object class 
             name>.id
         """
-        self.__objects[object.__class__.__name__ + '.' + str(object)] = object
+        self.__objects[object.__class__.__name__ + '.' + str(object.id)] = object
 
     def save(self):
         """ serializes __objects to the JSON file
@@ -44,4 +44,6 @@ class FileStorage:
                     self.new(eval(cls)(**value))
 
         except Exception:
-            pass
+            return
+        
+storage = FileStorage()

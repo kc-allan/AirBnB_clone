@@ -3,7 +3,7 @@
 
 from uuid import uuid4
 from datetime import datetime
-import models
+from models.engine.file_storage import storage
 
 class BaseModel:
     """ defines all common attributes/methods for other classes """
@@ -16,7 +16,7 @@ class BaseModel:
             self.id = str(uuid4())
             self.created_at = datetime.utcnow()
             self.updated_at = datetime.utcnow()
-            models.storage.new(self)
+            storage.new(self)
 
         else:
             for key, value in kwargs.items():
@@ -30,27 +30,27 @@ class BaseModel:
                 else:
                     self.__dict__[key] = value
 
-    def __Str__(self):
+    def __str__(self):
 
         return "[{}] ({}) {}".format(self.__class__.__name__, self.id,
                 self.__dict__)
 
     def save(self):
-
         self.updated_at = datetime.utcnow()
-        models.storage.save()
+        storage.save()
 
     def to_dict(self):
 
-        mp_object = {}
+        mp_objects = {}
 
-        for key, vale in self.__dict__.items():
+        for key, value in self.__dict__.items():
             if key == "created_at" or key == "updated_at":
                 mp_objects[key] = value.isoformat()
 
             else:
-                mp_object[key] = value
+                mp_objects[key] = value
 
         mp_objects["__class__"] = self.__class__.__name__
         
         return mp_objects
+    
