@@ -25,16 +25,15 @@ class BaseModel:
                     self.__dict__[key] = datetime.strptime(
                             value, DATE_TIME_FORMAT)
 
-                elif key[0] =="id":
+                elif key[0] == "id":
                     self.__dict__[key] = str(value)
 
                 else:
                     self.__dict__[key] = value
 
     def __str__(self):
-
-        return "[{}] ({}) {}".format(self.__class__.__name__, self.id,
-                self.__dict__)
+        return "[{}] ({}) {}".format(self.__class__.__name__,
+                                     self.id, self.__dict__)
 
     def save(self):
         self.updated_at = datetime.now()
@@ -52,6 +51,5 @@ class BaseModel:
                 mp_objects[key] = value
 
         mp_objects["__class__"] = self.__class__.__name__
-        
+
         return mp_objects
-    

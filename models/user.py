@@ -3,6 +3,7 @@
 
 from models.base_model import BaseModel
 
+
 class User(BaseModel):
     """ defines a class User that inherits from BaseModel """
 

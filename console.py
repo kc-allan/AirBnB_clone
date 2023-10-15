@@ -215,5 +215,6 @@ class HBNBCommand(cmd.Cmd):
                     obj.__dict__[k] = v
         obj.save()
 
+
 if __name__ == "__main__":
     HBNBCommand().cmdloop()

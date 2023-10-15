@@ -28,4 +28,3 @@ class TestReview(unittest.TestCase):
         for attr in self.attr_list:
             self.assertIs(type(getattr(self.review, attr)), str)
             self.assertFalse(bool(getattr(self.review, attr)))
-            
