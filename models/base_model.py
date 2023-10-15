@@ -5,17 +5,18 @@ from uuid import uuid4
 from datetime import datetime
 from models.engine.file_storage import storage
 
+
 class BaseModel:
     """ defines all common attributes/methods for other classes """
 
     def __init__(self, *args, **kwargs):
 
-        DATE_TIME_FORMAT = '%Y-%m-%dT%H:%M:%S.%f'
+        DATE_TIME_FORMAT = "%Y-%m-%dT%H:%M:%S.%f"
 
         if not kwargs:
             self.id = str(uuid4())
-            self.created_at = datetime.utcnow()
-            self.updated_at = datetime.utcnow()
+            self.created_at = datetime.now()
+            self.updated_at = datetime.now()
             storage.new(self)
 
         else:
@@ -36,7 +37,7 @@ class BaseModel:
                 self.__dict__)
 
     def save(self):
-        self.updated_at = datetime.utcnow()
+        self.updated_at = datetime.now()
         storage.save()
 
     def to_dict(self):
